@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio · Your Name</title>
+  <meta name="description" content="Portfolio cá nhân: dự án, kỹ năng, liên hệ." />
+  <meta property="og:title" content="Portfolio · Your Name" />
+  <meta property="og:description" content="Portfolio cá nhân: dự án, kỹ năng, liên hệ." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://picsum.photos/1200/630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://picsum.photos/1200/630" />
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA/9QeVAAAACXBIWXMAAAsSAAALEgHS3X78AAA...truncate..." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎯</text></svg>">
+  <style>
+    /* ====== Design tokens ====== */
+    :root{
+      --bg: #0b0c10;
+      --surface: #111318;
+      --elev: #171a21;
+      --text: #e6e6e6;
+      --muted: #b7b7b7;
+      --brand: #6ee7ff;
+      --brand-2: #a78bfa;
+      --ok: #34d399;
+      --danger: #fb7185;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --maxw: 1120px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f7f7fb; --surface:#ffffff; --elev:#ffffff; --text:#101214; --muted:#48505e; --shadow:0 10px 30px rgba(0,0,0,.06);} 
+      body{background-image: radial-gradient(600px 600px at 0% 0%, #eef7ff 0%, rgba(0,0,0,0) 60%), radial-gradient(600px 600px at 100% 0%, #f7ecff 0%, rgba(0,0,0,0) 60%);}  
+    }
+
+    /* ====== Base ====== */
+    *{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:24px}
+    .surface{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#ffffff10;border:1px solid #ffffff20;font-size:.85rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid #ffffff2a;background:linear-gradient(180deg, #ffffff10, #00000005);color:var(--text);text-decoration:none;font-weight:600}
+    .btn:hover{border-color:#ffffff40;transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg, var(--brand), var(--brand-2));color:#0b0c10;border:none}
+    .btn.primary:hover{filter:saturate(1.05) brightness(1.02)}
+    .grid{display:grid;gap:20px}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:960px){.grid.cols-3{grid-template-columns:1fr 1fr}}
+    @media (max-width:680px){.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}}
+
+    /* ====== Accessibility ====== */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;background:#000;color:#fff;padding:10px;border-radius:8px;z-index:999}
+    :focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    @media (prefers-reduced-motion: reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+    /* ====== Header ====== */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,0));backdrop-filter: blur(8px)}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    nav .links a{padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--muted)}
+    nav .links a:hover{background:#ffffff10;color:var(--text)}
+
+    /* ====== Hero ====== */
+    .hero{padding:64px 24px}
+    .hero .wrap{display:grid;grid-template-columns:1.4fr .8fr;gap:28px;align-items:center}
+    .hero h1{font-size:clamp(28px,4.6vw,48px);line-height:1.15;margin:0}
+    .hero p{color:var(--muted);margin:14px 0 24px}
+    .avatar{border-radius:20px;overflow:hidden;border:1px solid #ffffff22}
+
+    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+
+    /* ====== Sections ====== */
+    section{scroll-margin-top:80px}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin:8px 0 18px}
+    .section-title h2{margin:0;font-size:clamp(22px,3vw,28px)}
+    .card{background:var(--elev);border:1px solid #ffffff12;padding:18px;border-radius:var(--radius);transition:transform .15s ease}
+    .card:hover{transform:translateY(-2px)}
+    .card .title{font-weight:700}
+    .card .meta{color:var(--muted);font-size:.9rem}
+
+    /* ====== Footer ====== */
+    footer{color:var(--muted);padding:32px 24px;text-align:center}
+
+    /* ====== Print ====== */
+    @media print{
+      header, .hero .actions, .contact-actions, .chip{display:none!important}
+      body{background:#fff;color:#000}
+      .surface,.card{box-shadow:none;border:1px solid #ddd}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Bỏ qua menu</a>
+
+  <header>
+    <div class="container">
+      <nav>
+        <strong>quan.dev</strong>
+        <div class="links" aria-label="Điều hướng chính">
+          <a href="#about">Giới thiệu</a>
+          <a href="#projects">Dự án</a>
+          <a href="#skills">Kỹ năng</a>
+          <a href="#contact">Liên hệ</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero container surface">
+      <div class="wrap">
+        <div>
+          <span class="chip" aria-hidden="true">Sinh viên · Kotlin/Android</span>
+          <h1>Xin chào, mình là <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Quan</span>.
+            Mình xây ứng dụng web nhanh, gọn, tối ưu.</h1>
+          <p>Tập trung Android bằng Kotlin, kiến trúc sạch, đồng bộ realtime, và tối ưu hiệu năng.</p>
+          <div class="actions" style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn primary" href="#projects">Xem dự án</a>
+            <a class="btn" href="https://example.com/demo" target="_blank" rel="noreferrer">Demo</a>
+            <a class="btn" href="#contact">Liên hệ</a>
+            <a class="btn" href="./CV.pdf" download>CV PDF</a>
+          </div>
+        </div>
+        <div class="avatar"><img src="https://picsum.photos/800/600" width="800" height="600" alt="Ảnh đại diện hoặc ảnh minh họa" loading="lazy"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="container">
+      <div class="section-title"><h2>Giới thiệu</h2><span class="chip">Tóm tắt</span></div>
+      <div class="card">
+        <p>Sinh viên CNTT. Tập trung Android bằng Kotlin. Ưu tiên kiến trúc sạch, trải nghiệm mượt, đồng bộ thời gian thực.</p>
+        <ul>
+          <li>Kinh nghiệm: MVVM, Coroutines, ViewBinding, Material Design.</li>
+          <li>Dịch vụ: REST với Retrofit, Socket.IO realtime, FCM push, lưu trữ cục bộ SharedPreferences, Cloudinary.</li>
+          <li>Công cụ: Android Studio, Gradle KTS, debug và profiling.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container">
+      <div class="section-title"><h2>Dự án</h2><a class="btn" href="https://github.com/Quan0414" target="_blank" rel="noreferrer">GitHub</a></div>
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="title">Đếm Ngày “Xa” Nhau</div>
+          <p class="meta">Vai trò: Android Kotlin | 2025</p>
+          <p>Ứng dụng cho cặp đôi: ghép đôi bằng mã duy nhất, đếm mốc kỷ niệm, chat mã hóa AES, pet ảo, nhiệm vụ hằng ngày, đồng bộ realtime.</p>
+          <a class="btn" href="https://github.com/Quan0414" target="_blank" rel="noreferrer">Xem mã nguồn</a>
+          <a class="btn" href="https://example.com/demo" target="_blank" rel="noreferrer">Xem demo</a>
+        </article>
+        <article class="card">
+          <div class="title">RecipeHub</div>
+          <p class="meta">Vai trò: Frontend | 2024</p>
+          <p>Website công thức nấu ăn. SPA với route sạch, bộ lọc, lưu offline, và tối ưu Lighthouse 95+.</p>
+          <a class="btn" href="#">Case study</a>
+        </article>
+        <article class="card">
+          <div class="title">Mini‑Games Android</div>
+          <p class="meta">Vai trò: Dev | 2024</p>
+          <p>Bộ trò chơi nhỏ với quảng cáo, viết bằng Kotlin/Compose, đóng gói đa module.</p>
+          <a class="btn" href="#">Google Play</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="container">
+      <div class="section-title"><h2>Kỹ năng</h2><span class="chip">Kotlin & Android</span></div>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="title">Android/Kotlin</div>
+          <p>MVVM, Coroutines, ViewBinding, Material, Navigation, WorkManager.</p>
+        </div>
+        <div class="card">
+          <div class="title">Backend & Realtime</div>
+          <p>Retrofit (REST), Socket.IO, FCM, Cloudinary, SharedPreferences.</p>
+        </div>
+        <div class="card">
+          <div class="title">Build & Deploy</div>
+          <p>Gradle KTS, ký ứng dụng, CI/CD cơ bản, kiểm thử và profiling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container">
+      <div class="section-title"><h2>Liên hệ</h2><span class="chip">Kết nối</span></div>
+      <div class="card">
+        <p>Đang mở cơ hội thực tập và freelance.</p>
+        <div class="contact-actions" style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn primary" href="mailto:contact@quan.dev">contact@quan.dev</a>
+          <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="btn" href="https://github.com/Quan0414" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+      <!-- Deploy
+    <section id="deploy" class="container">
+      <div class="section-title"><h2>Triển khai</h2><span class="chip">Demo & Domain</span></div>
+      <div class="card">
+        <ol>
+          <li><strong>GitHub Pages:</strong> Tạo repo → push <code>index.html</code> → Settings → Pages → Branch <code>main</code> <code>/root</code>. Trỏ domain bằng bản ghi A hoặc CNAME.</li>
+          <li><strong>Vercel:</strong> New Project → kéo thả <code>index.html</code> hoặc kết nối repo → Project → Domains → thêm domain → CNAME về <code>cname.vercel-dns.com</code>.</li>
+          <li><strong>Demo URL:</strong> thay <code>https://example.com/demo</code> bằng link thật sau khi deploy.</li>
+        </ol>
+      </div>
+    </section> -->
+  </main>
+
+  <footer>
+    © <span id="y"></span> Your Name · Made with HTML & CSS
+  </footer>
+
+  <script>
+    // Không bắt buộc JS. Chỉ dùng để hiện năm.
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
